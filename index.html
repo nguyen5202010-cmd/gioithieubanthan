@@ -123,6 +123,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
     }
 
     .brand {
@@ -134,20 +135,22 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      flex-wrap: wrap;
+      gap: 24px;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 500;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
       position: relative;
       transition: var(--transition);
     }
@@ -179,7 +182,7 @@
     }
 
     section {
-      padding: 56px 0;
+      padding: 52px 0;
     }
 
     .section-label {
@@ -366,7 +369,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
-    /* 2. Thông tin cá nhân */
+    /* Luxury Card */
     .luxury-card {
       background: var(--bg-card);
       border: 1px solid var(--border-gold);
@@ -381,6 +384,7 @@
       border-color: rgba(212, 175, 55, 0.55);
     }
 
+    /* 2. Thông tin cá nhân */
     .info-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -416,6 +420,121 @@
       font-size: 1.12rem;
       font-weight: 600;
       color: var(--text-main);
+    }
+
+    /* Tính cách & Hoạt động Đoàn trường */
+    .trait-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      margin-bottom: 24px;
+    }
+
+    .trait-pill {
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      transition: var(--transition);
+    }
+
+    .trait-pill:hover {
+      transform: translateY(-2px);
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-main);
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 8px;
+    }
+
+    .highlight-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 18px;
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    .highlight-box:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-main);
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .highlight-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .highlight-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      color: var(--gold-light);
+    }
+
+    .mini-toggle {
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .mini-toggle:hover {
+      background: rgba(212, 175, 55, 0.24);
+      border-color: var(--gold-main);
+    }
+
+    .highlight-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .highlight-list li {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .highlight-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--gold-main);
+      font-size: 0.85rem;
+    }
+
+    .extra-note {
+      display: none;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(212, 175, 55, 0.25);
+      color: var(--gold-light);
+      font-size: 0.9rem;
+    }
+
+    .extra-note.open {
+      display: block;
     }
 
     /* 3. Liên hệ & QR Ngân hàng */
@@ -670,6 +789,7 @@
       }
 
       .info-grid,
+      .highlight-grid,
       .contact-layout {
         grid-template-columns: 1fr;
       }
@@ -678,8 +798,13 @@
         padding: 24px 20px;
       }
 
+      .nav-container {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
       .nav-links {
-        gap: 16px;
+        gap: 14px;
       }
     }
   </style>
@@ -699,6 +824,7 @@
       <ul class="nav-links">
         <li><a href="#gioi-thieu">Giới thiệu</a></li>
         <li><a href="#thong-tin">Thông tin</a></li>
+        <li><a href="#tinh-cach">Đoàn &amp; Tính cách</a></li>
         <li><a href="#lien-he">Liên hệ</a></li>
       </ul>
     </div>
@@ -714,11 +840,11 @@
           <span class="gold-text">Nguyễn Huỳnh Anh Thư</span>
         </h1>
         <p class="hero-subtitle">
-          Cảm ơn thầy cô và các bạn đã ghé thăm trang cá nhân nhỏ của mình. Đây là không gian lưu giữ thông tin giới thiệu bản thân, kết nối học tập và liên lạc nhanh chóng, gọn gàng.
+          Cảm ơn thầy cô và các bạn đã ghé thăm trang cá nhân nhỏ của mình. Đây là không gian lưu giữ thông tin bản thân, hành trình hoạt động Đoàn trường và kết nối nhanh chóng, gọn gàng.
         </p>
         <div class="hero-actions">
           <a href="#thong-tin" class="btn btn-gold">Xem thông tin cá nhân</a>
-          <a href="#lien-he" class="btn btn-outline">Kết nối &amp; Mã QR</a>
+          <a href="#tinh-cach" class="btn btn-outline">Tính cách &amp; Hoạt động Đoàn</a>
         </div>
       </div>
 
@@ -763,7 +889,60 @@
       </div>
     </section>
 
-    <!-- PHẦN 3: THÔNG TIN LIÊN HỆ & MÃ QR -->
+    <!-- PHẦN 3: TÍNH CÁCH & HOẠT ĐỘNG ĐOÀN TRƯỜNG -->
+    <section id="tinh-cach" class="reveal">
+      <div class="luxury-card">
+        <span class="section-label">Màu sắc cá nhân &amp; Phong trào</span>
+        <h2 class="section-title">Tính cách &amp; <span class="gold-text">Hoạt động Đoàn trường</span></h2>
+        <p style="color: var(--text-muted);">
+          Vừa nghiêm túc khi làm việc nhóm, vừa giữ tinh thần cởi mở, hài hước để mọi người luôn thoải mái và gắn kết.
+        </p>
+
+        <div class="trait-tags">
+          <span class="trait-pill">Hòa đồng &amp; cởi mở</span>
+          <span class="trait-pill">Trách nhiệm cao</span>
+          <span class="trait-pill">Thích phối hợp đồng đội</span>
+          <span class="trait-pill">Năng nổ phong trào</span>
+          <span class="trait-pill">Chăm chút chi tiết</span>
+        </div>
+
+        <div class="highlight-grid">
+          <!-- Khung Tính cách -->
+          <div class="highlight-box">
+            <div class="highlight-head">
+              <h3>Nét Tính Cách</h3>
+              <button class="mini-toggle" onclick="toggleExtra('extraTrait', this)">Chi tiết</button>
+            </div>
+            <ul class="highlight-list">
+              <li>Dễ gần, vui vẻ khi trao đổi với bạn bè và hết mình khi làm việc cùng tập thể.</li>
+              <li>Chủ động sắp xếp đầu việc, chú ý từng chi tiết nhỏ để sản phẩm hoàn thiện chỉn chu.</li>
+              <li>Luôn lắng nghe và điều chỉnh nhịp làm việc phù hợp với từng thành viên.</li>
+            </ul>
+            <div class="extra-note" id="extraTrait">
+              Vibe hằng ngày: học tập tập trung, làm việc có trách nhiệm nhưng lúc chill thì cực kỳ thoải mái, hài hước.
+            </div>
+          </div>
+
+          <!-- Khung Hoạt động Đoàn trường -->
+          <div class="highlight-box">
+            <div class="highlight-head">
+              <h3>Hoạt Động Đoàn Trường</h3>
+              <button class="mini-toggle" onclick="toggleExtra('extraYouth', this)">Chi tiết</button>
+            </div>
+            <ul class="highlight-list">
+              <li>Tích cực tham gia các chương trình, hội thi, sân chơi ngoại khóa và phong trào Đoàn trường.</li>
+              <li>Hỗ trợ lên ý tưởng, thiết kế hình ảnh/backdrop, soạn kịch bản và điều phối phần trình bày nhóm.</li>
+              <li>Lan tỏa tinh thần đoàn kết, năng động của tuổi trẻ 11 Toán 1 trong các hoạt động tập thể.</li>
+            </ul>
+            <div class="extra-note" id="extraYouth">
+              Sẵn sàng góp sức cho các chiến dịch tình nguyện, văn nghệ, diễn đàn thanh niên và hoạt động chi đoàn.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 4: THÔNG TIN LIÊN HỆ & MÃ QR -->
     <section id="lien-he" class="reveal">
       <div class="luxury-card">
         <span class="section-label">Kết nối nhanh</span>
@@ -786,29 +965,29 @@
               <span class="arrow-tag">Mở link ↗</span>
             </a>
 
-            <a href="https://zalo.me/0327046128" target="_blank" rel="noopener" class="contact-btn">
+            <a href="https://zalo.me/0327946128" target="_blank" rel="noopener" class="contact-btn">
               <div class="contact-left">
                 <div class="icon-box">ZL</div>
                 <div class="contact-meta">
                   <span>Nhắn tin nhanh</span>
-                  <strong>Zalo · 0327046128</strong>
+                  <strong>Zalo · 0327946128</strong>
                 </div>
               </div>
               <span class="arrow-tag">Nhắn Zalo ↗</span>
             </a>
 
-            <div class="contact-btn" onclick="copyText('0327046128', 'Đã sao chép số điện thoại 0327046128!')">
+            <div class="contact-btn" onclick="copyText('0327946128', 'Đã sao chép số điện thoại 0327946128!')">
               <div class="contact-left">
                 <div class="icon-box">☎</div>
                 <div class="contact-meta">
                   <span>Điện thoại (Bấm để sao chép)</span>
-                  <strong>0327046128</strong>
+                  <strong>0327946128</strong>
                 </div>
               </div>
               <span class="arrow-tag">Sao chép</span>
             </div>
 
-            <a href="tel:0327046128" class="btn btn-gold" style="margin-top: 6px;">
+            <a href="tel:0327946128" class="btn btn-gold" style="margin-top: 6px;">
               Gọi điện thoại trực tiếp
             </a>
           </div>
@@ -821,16 +1000,16 @@
             </h3>
 
             <div class="qr-img-wrap" onclick="openQrModal()" title="Bấm để phóng to mã QR">
-              <img src="anh-qr.jpg.jpg" alt="Mã QR Ngân hàng Nguyễn Huỳnh Anh Thư" />
+              <img src="anh-qr.jpg.jpg" alt="Mã QR Ngân hàng AGRIBANK Nguyễn Huỳnh Anh Thư" />
             </div>
 
             <div class="bank-details">
-              Ngân hàng: <strong>Tên Ngân Hàng</strong><br>
+              Ngân hàng: <strong>AGRIBANK</strong><br>
               STK: <strong id="bank-stk">7101205238449</strong> · NGUYEN HUYNH ANH THU
             </div>
 
             <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-              <button class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;" onclick="copyText('7101205238449', 'Đã sao chép số tài khoản!')">
+              <button class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;" onclick="copyText('7101205238449', 'Đã sao chép số tài khoản AGRIBANK!')">
                 Sao chép STK
               </button>
               <button class="btn btn-gold" style="padding: 9px 18px; font-size: 0.85rem;" onclick="openQrModal()">
@@ -851,7 +1030,7 @@
   <div class="modal" id="qrModal" onclick="closeQrModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold-light);">
-        Quét Mã QR Ngân Hàng
+        Quét Mã QR AGRIBANK
       </h3>
       <img src="anh-qr.jpg.jpg" alt="Mã QR phóng to" />
       <button class="btn btn-gold" style="width: 100%;" onclick="closeQrModal()">Đóng lại</button>
@@ -884,7 +1063,7 @@
     });
 
     // Hiệu ứng gợn sóng (ripple) khi bấm nút & thẻ liên hệ
-    document.querySelectorAll('.btn, .contact-btn').forEach((el) => {
+    document.querySelectorAll('.btn, .contact-btn, .mini-toggle').forEach((el) => {
       el.addEventListener('pointerdown', function (e) {
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -914,6 +1093,13 @@
       item.style.animationDuration = `${13 + (i % 6) * 3}s`;
       item.style.animationDelay = `${-(i * 2.1)}s`;
       symbolsContainer.appendChild(item);
+    }
+
+    function toggleExtra(id, btn) {
+      const box = document.getElementById(id);
+      if (!box) return;
+      const isOpen = box.classList.toggle('open');
+      btn.textContent = isOpen ? 'Thu gọn' : 'Chi tiết';
     }
 
     function copyText(text, message) {
