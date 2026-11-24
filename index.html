@@ -40,18 +40,79 @@
       line-height: 1.7;
       overflow-x: hidden;
       background-image:
-        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.09) 0%, transparent 40%),
-        radial-gradient(circle at 85% 75%, rgba(212, 175, 55, 0.07) 0%, transparent 45%);
+        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.1) 0%, transparent 42%),
+        radial-gradient(circle at 85% 75%, rgba(212, 175, 55, 0.08) 0%, transparent 45%);
+    }
+
+    /* Quầng sáng đi theo trỏ chuột */
+    .cursor-glow {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0.03) 45%, transparent 70%);
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      transition: opacity 0.25s ease;
+      opacity: 0;
+    }
+
+    @media (hover: hover) {
+      body:hover .cursor-glow {
+        opacity: 1;
+      }
+    }
+
+    /* Ký hiệu & biểu tượng bay sinh động ở hậu cảnh */
+    .ambient-symbols {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .floating-symbol {
+      position: absolute;
+      color: rgba(212, 175, 55, 0.16);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      user-select: none;
+      animation: floatSymbol linear infinite;
+      text-shadow: 0 0 14px rgba(212, 175, 55, 0.12);
+    }
+
+    @keyframes floatSymbol {
+      0% {
+        transform: translateY(108vh) rotate(0deg) scale(0.95);
+        opacity: 0;
+      }
+      12% {
+        opacity: 0.85;
+      }
+      88% {
+        opacity: 0.85;
+      }
+      100% {
+        transform: translateY(-14vh) rotate(220deg) scale(1.08);
+        opacity: 0;
+      }
     }
 
     /* Sticky Header */
+    header, main, footer {
+      position: relative;
+      z-index: 10;
+    }
+
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      background: rgba(11, 12, 16, 0.82);
+      background: rgba(11, 12, 16, 0.84);
       border-bottom: 1px solid var(--border-gold);
     }
 
@@ -168,7 +229,7 @@
       gap: 14px;
     }
 
-    /* Luxury Buttons */
+    /* Luxury Buttons + Ripple & Hover */
     .btn {
       position: relative;
       display: inline-flex;
@@ -199,7 +260,7 @@
       left: -100%;
       width: 60%;
       height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
       transition: 0.6s;
     }
 
@@ -208,8 +269,8 @@
     }
 
     .btn-gold:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 32px rgba(212, 175, 55, 0.42);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 34px rgba(212, 175, 55, 0.45);
     }
 
     .btn-outline {
@@ -219,13 +280,30 @@
     }
 
     .btn-outline:hover {
-      background: rgba(212, 175, 55, 0.16);
+      background: rgba(212, 175, 55, 0.18);
       border-color: var(--gold-main);
       transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(212, 175, 55, 0.16);
     }
 
     .btn:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
+    }
+
+    .ripple-circle {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: rippleAnim 0.65s ease-out;
+      background: rgba(255, 255, 255, 0.42);
+      pointer-events: none;
+    }
+
+    @keyframes rippleAnim {
+      to {
+        transform: scale(3.6);
+        opacity: 0;
+      }
     }
 
     /* Portrait Frame */
@@ -242,14 +320,24 @@
       aspect-ratio: 3 / 4;
       border-radius: 24px;
       padding: 10px;
-      background: linear-gradient(145deg, rgba(212, 175, 55, 0.5), rgba(212, 175, 55, 0.08));
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.55), rgba(212, 175, 55, 0.08));
       box-shadow: var(--shadow-luxury);
       transition: var(--transition);
+      animation: gentleFloat 5.5s ease-in-out infinite;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
     }
 
     .portrait-frame:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(212, 175, 55, 0.2);
+      transform: translateY(-10px) scale(1.015);
+      box-shadow: 0 28px 65px rgba(0, 0, 0, 0.78), 0 0 38px rgba(212, 175, 55, 0.24);
     }
 
     .portrait-frame img {
@@ -309,9 +397,10 @@
     }
 
     .info-item:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       border-color: var(--gold-main);
-      background: rgba(212, 175, 55, 0.05);
+      background: rgba(212, 175, 55, 0.06);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
     }
 
     .info-label {
@@ -345,6 +434,8 @@
     }
 
     .contact-btn {
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -359,10 +450,14 @@
     }
 
     .contact-btn:hover {
-      transform: translateX(6px);
+      transform: translateX(7px) translateY(-2px);
       border-color: var(--gold-main);
-      background: rgba(212, 175, 55, 0.08);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      background: rgba(212, 175, 55, 0.1);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 0 18px rgba(212, 175, 55, 0.12);
+    }
+
+    .contact-btn:active {
+      transform: translateX(4px) scale(0.985);
     }
 
     .contact-left {
@@ -382,6 +477,12 @@
       color: var(--gold-light);
       font-weight: 700;
       font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .contact-btn:hover .icon-box {
+      transform: rotate(-6deg) scale(1.06);
+      background: rgba(212, 175, 55, 0.24);
     }
 
     .contact-meta span {
@@ -399,6 +500,12 @@
       color: var(--gold-main);
       font-size: 0.9rem;
       font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .contact-btn:hover .arrow-tag {
+      transform: translateX(4px);
+      color: var(--gold-light);
     }
 
     /* QR Box */
@@ -408,7 +515,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(160deg, rgba(28, 31, 44, 0.9), rgba(15, 17, 24, 0.95));
+      background: linear-gradient(160deg, rgba(28, 31, 44, 0.92), rgba(15, 17, 24, 0.96));
       border: 1px solid var(--gold-main);
       border-radius: 20px;
       padding: 28px 22px;
@@ -416,8 +523,8 @@
     }
 
     .qr-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(212, 175, 55, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 45px rgba(212, 175, 55, 0.18);
     }
 
     .qr-img-wrap {
@@ -433,7 +540,7 @@
     }
 
     .qr-img-wrap:hover {
-      transform: scale(1.04);
+      transform: scale(1.05) rotate(1deg);
     }
 
     .qr-img-wrap img {
@@ -533,6 +640,10 @@
 
     /* Responsive Mobile */
     @media (max-width: 820px) {
+      .cursor-glow {
+        display: none;
+      }
+
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
@@ -574,6 +685,12 @@
   </style>
 </head>
 <body>
+
+  <!-- Quầng sáng theo trỏ chuột -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Các ký hiệu & biểu tượng bay lơ lửng -->
+  <div class="ambient-symbols" id="ambientSymbols" aria-hidden="true"></div>
 
   <!-- Header -->
   <header>
@@ -745,6 +862,7 @@
   <div class="toast" id="toast">Đã sao chép!</div>
 
   <script>
+    // Hiệu ứng hiện mượt mà khi cuộn trang
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -755,6 +873,48 @@
     }, { threshold: 0.12 });
 
     reveals.forEach((el) => observer.observe(el));
+
+    // Quầng sáng vàng gold đi theo trỏ chuột
+    const cursorGlow = document.getElementById('cursorGlow');
+    window.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'mouse' && cursorGlow) {
+        cursorGlow.style.left = `${e.clientX}px`;
+        cursorGlow.style.top = `${e.clientY}px`;
+      }
+    });
+
+    // Hiệu ứng gợn sóng (ripple) khi bấm nút & thẻ liên hệ
+    document.querySelectorAll('.btn, .contact-btn').forEach((el) => {
+      el.addEventListener('pointerdown', function (e) {
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-circle';
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 650);
+      });
+    });
+
+    // Tạo các ký hiệu & biểu tượng bay sinh động ở nền
+    const symbolsContainer = document.getElementById('ambientSymbols');
+    const symbolsList = ['∑', 'π', '∞', '✦', '◇', '∫', '✧', 'Δ'];
+    for (let i = 0; i < 16; i++) {
+      const item = document.createElement('span');
+      item.className = 'floating-symbol';
+      item.textContent = symbolsList[i % symbolsList.length];
+      item.style.left = `${(i * 6.5 + (i % 3) * 2) % 96}%`;
+      item.style.fontSize = `${18 + (i % 4) * 7}px`;
+      item.style.animationDuration = `${13 + (i % 6) * 3}s`;
+      item.style.animationDelay = `${-(i * 2.1)}s`;
+      symbolsContainer.appendChild(item);
+    }
 
     function copyText(text, message) {
       navigator.clipboard.writeText(text).then(() => {
